@@ -6,7 +6,7 @@ pipeline {
         DOCKER_IMAGE = "kumarmijar/productmanagementsystem:latest"
         GIT_CREDENTIALS = "github-cred-id"
         DOCKER_CREDENTIALS = "dockerhub-cred-id"
-        DEPLOY_PORT = "8080"
+        DEPLOY_PORT = "8081"
     }
 
     stages {
@@ -47,7 +47,7 @@ pipeline {
                 sh "docker rm productmanagementsystem || true"
                 
                 echo "Running the container..."
-                sh 'docker run -d -p ${DEPLOY_PORT}:8080 --name productmanagementsystem kumarmijar/productmanagementsystem'
+                sh 'docker run -d -p ${DEPLOY_PORT}:8081 --name productmanagementsystem kumarmijar/productmanagementsystem'
             }
         }
     }
