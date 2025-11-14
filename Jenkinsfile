@@ -47,7 +47,7 @@ pipeline {
                 sh "docker rm productmanagementsystem || true"
                 
                 echo "Running the container..."
-                sh 'docker run -d -p ${DEPLOY_PORT}:8081 --name productmanagementsystem kumarmijar/productmanagementsystem'
+                sh 'docker run -d -p 8081:8080 --name productmanagementsystem kumarmijar/productmanagementsystem'
             }
         }
     }
