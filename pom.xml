@@ -59,7 +59,6 @@
         <resources>
             <resource>
                 <directory>WebContent</directory>
-                <targetPath>/</targetPath>
                 <includes>
                     <include>**/*</include>
                 </includes>
