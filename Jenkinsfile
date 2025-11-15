@@ -7,6 +7,7 @@ pipeline {
         GIT_CREDENTIALS = "github-cred-id"
         DOCKER_CREDENTIALS = "dockerhub-cred-id"
         DEPLOY_PORT = "8081"
+        SONARQUBE = "sonar"
     }
 
     stages {
@@ -22,6 +23,33 @@ pipeline {
                 sh 'mvn clean package -DskipTests'
             }
         }
+        
+       stage('SonarQube Analysis') {
+    steps {
+        echo "Running SonarQube Scan..."
+
+        withSonarQubeEnv("${SONARQUBE}") {
+            sh '''
+                sonar-scanner \
+                -Dsonar.projectKey=productmanagement \
+                -Dsonar.projectName=productmanagementsystem \
+                -Dsonar.sources=./src \
+                -Dsonar.java.binaries=./target/classes \
+                -Dsonar.host.url=http://192.168.43.167:9000
+            '''
+        }
+    }
+}
+
+
+stage('Quality Gate') {
+    steps {
+        timeout(time: 2, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
+
 
         stage('Build Docker Image') {
             steps {
