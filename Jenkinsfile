@@ -29,17 +29,17 @@ pipeline {
         echo "Running SonarQube Scan..."
 
         withSonarQubeEnv("${SONARQUBE}") {
-            sh '''
-                sonar-scanner \
+            sh """
+                ${tool 'sonar-scanner'}/bin/sonar-scanner \
                 -Dsonar.projectKey=productmanagement \
                 -Dsonar.projectName=productmanagementsystem \
                 -Dsonar.sources=./src \
-                -Dsonar.java.binaries=./target/classes \
-                -Dsonar.host.url=http://192.168.43.167:9000
-            '''
+                -Dsonar.java.binaries=./target/classes
+            """
         }
     }
 }
+
 
 
 stage('Quality Gate') {
