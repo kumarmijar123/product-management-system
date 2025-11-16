@@ -58,6 +58,16 @@ stage('Quality Gate') {
             }
         }
 
+     
+      stage('Scan Docker Image with Trivy') {
+            steps {
+                echo "Scanning Docker image for vulnerabilities..."
+                sh """
+                    trivy image --exit-code 1 --severity CRITICAL,HIGH kumarmijar/productmanagementsystem
+                """
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 echo "Logging in to Docker Hub and pushing image..."
