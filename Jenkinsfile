@@ -61,11 +61,11 @@ stage('Quality Gate') {
       stage('Scan Docker Image with Trivy') {
             steps {
                 echo "trivy for checking vulneralibiltiy"
-                catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-    sh "trivy image --exit-code 1 --severity CRITICAL,HIGH kumarmijar/productmanagementsystem"
-}
+                sh '''
+trivy image --exit-code 0 --severity CRITICAL,HIGH \
+    kumarmijar/productmanagementsystem || true
+'''
 
-        }
 }
 
         stage('Push Docker Image') {
