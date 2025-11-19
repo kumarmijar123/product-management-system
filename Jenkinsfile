@@ -67,7 +67,7 @@ trivy image --exit-code 0 --severity CRITICAL,HIGH \
 '''
 
 }
-
+}
         stage('Push Docker Image') {
             steps {
                 echo "Logging in to Docker Hub and pushing image..."
