@@ -28,7 +28,7 @@ pipeline {
     steps {
         echo "Running SonarQube Scan..."
 
-        withSonarQubeEnv("${SONARQUBE}") {
+        withSonarQubeEnv('sonar') {
             sh """
                 ${tool 'sonar-scanner'}/bin/sonar-scanner \
                 -Dsonar.projectKey=productmanagement \
