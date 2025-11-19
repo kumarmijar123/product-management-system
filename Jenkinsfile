@@ -66,6 +66,7 @@ stage('Quality Gate') {
 }
 
         }
+}
 
         stage('Push Docker Image') {
             steps {
